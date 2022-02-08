@@ -4,16 +4,24 @@ import java.util.*;
 
 public class Main {
 
-    static Graph g = new Graph(10);
+    static Graph g = new Graph(26);
     static int sizeArray = 0;
     public static void main(String[] args) {
         // write your code here
         List<List<Integer>> arrayLists = new ArrayList<List<Integer>>() {{
+            add(Arrays.asList(4, 4, 5, 4, 2));
+            add(Arrays.asList(3, 2, 4, 6, 0));
+            add(Arrays.asList(4, 1, 5, 5, 2));
+            add(Arrays.asList(3, 0, 9, 6, 0));
+            add(Arrays.asList(1, 2, 6, 6, 3));
+
+        }};
+   /*     List<List<Integer>> arrayLists = new ArrayList<List<Integer>>() {{
             add(Arrays.asList(1, 3, 3));
             add(Arrays.asList(2, 1, 4));
             add(Arrays.asList(0, 6, 4));
 
-        }};
+        }};*/
 
         sizeArray = arrayLists.size();
         List<Integer> numbers = new ArrayList<>();
@@ -66,7 +74,7 @@ public class Main {
             int start_col = max(0, line - size);
             int count = min(line, (size - start_col), size);
             for (int j = 0; j < count; j++) {
-                if (count != 1 && j + 1 < count && line < size) {
+                if (count != 1 && j + 1 < count && line <= size) {
                     g.addEdge(((size * (min(size, line) - 2 - j)) + (size - 2 - j)) + 1, ((size * (min(size, line) - 1 - j)) + ((size - 1 - j))) + 1, arrayList.get(min(size, line) - 1 - j).get(size - 1 - j));
                 } else if (count != 1 && j + 1 < count && line > size) {
                     g.addEdge(((size * (min(size, line) - 2 - j)) + (size - flag - j)) + 1, ((size * (min(size, line) - 1 - j)) + (size - flag1 - j)) + 1, arrayList.get(min(size, line) - 1 - j).get(size - flag1 - j));
