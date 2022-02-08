@@ -5,16 +5,17 @@ import java.util.*;
 public class Main {
 
     static Graph g = new Graph(10);
-
+    static int sizeArray = 0;
     public static void main(String[] args) {
         // write your code here
-
         List<List<Integer>> arrayLists = new ArrayList<List<Integer>>() {{
             add(Arrays.asList(1, 3, 3));
             add(Arrays.asList(2, 1, 4));
             add(Arrays.asList(0, 6, 4));
+
         }};
 
+        sizeArray = arrayLists.size();
         List<Integer> numbers = new ArrayList<>();
 
         for (List<Integer> arrayL : arrayLists) {
@@ -22,7 +23,7 @@ public class Main {
         }
 
         // find first values [length - 1][0]
-        for (int i = 0; i < numbers.size() - 1; i = i + 3) {
+        for (int i = 0; i < numbers.size() - 1; i = i + sizeArray) {
             g.addEdge(0, i + 1, numbers.get(i));
         }
 
@@ -40,9 +41,7 @@ public class Main {
         diagonalOrderList(arrayLists);
         // find values from left to diagonal down
         diagonalOrderDownList(arrayLists);
-
         int s = 0;
-        System.out.println("Following are longest distances from source vertex is  initialVertex  ");
         g.longestPath(s);
     }
 
@@ -67,7 +66,7 @@ public class Main {
             int start_col = max(0, line - size);
             int count = min(line, (size - start_col), size);
             for (int j = 0; j < count; j++) {
-                if (count != 1 && j + 1 < count && line <= size) {
+                if (count != 1 && j + 1 < count && line < size) {
                     g.addEdge(((size * (min(size, line) - 2 - j)) + (size - 2 - j)) + 1, ((size * (min(size, line) - 1 - j)) + ((size - 1 - j))) + 1, arrayList.get(min(size, line) - 1 - j).get(size - 1 - j));
                 } else if (count != 1 && j + 1 < count && line > size) {
                     g.addEdge(((size * (min(size, line) - 2 - j)) + (size - flag - j)) + 1, ((size * (min(size, line) - 1 - j)) + (size - flag1 - j)) + 1, arrayList.get(min(size, line) - 1 - j).get(size - flag1 - j));
